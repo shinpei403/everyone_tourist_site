@@ -40,6 +40,13 @@ public class IndexServlet extends HttpServlet {
 
         request.setAttribute("members", members);
 
+        String flush = (String)request.getSession().getAttribute("flush");
+
+        if (flush != null) {
+            request.setAttribute("flush", flush);
+            request.getSession().removeAttribute("flush");
+        }
+
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/index.jsp");
         rd.forward(request, response);
 

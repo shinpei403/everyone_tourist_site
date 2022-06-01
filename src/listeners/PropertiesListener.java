@@ -31,7 +31,7 @@ public class PropertiesListener implements ServletContextListener {
 
         //プロパティファイルを読み込み、アプリケーションスコープに設定する
         try {
-            InputStream is = PropertiesListener.class.getClassLoader().getResourceAsStream("application.properties");
+            InputStream is = PropertiesListener.class.getClassLoader().getResourceAsStream("../../META-INF/application.properties");
 
             Properties properties = new Properties();
             properties.load(is);

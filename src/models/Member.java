@@ -13,7 +13,11 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name = "getAllMembers",
-        query = "SELECT m FROM Member AS m ORDER BY m.id DESC"
+        query = "SELECT m FROM Member AS m ORDER BY m.id DESC"),
+
+    @NamedQuery(
+        name = "memberCountRegisteredByMail",
+        query = "SELECT COUNT(m) FROM Member AS m WHERE m.mail = :mail"
     )
 })
 @Table(name = "members")
@@ -55,6 +59,8 @@ public class Member {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
     public String getHometown() {
         return hometown;
