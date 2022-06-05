@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ShowLoginServlet
+ * Servlet implementation class IndexTopServlet
  */
-@WebServlet("/showlogin")
-public class ShowLoginServlet extends HttpServlet {
+@WebServlet("/indextop")
+public class IndexTopServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowLoginServlet() {
+    public IndexTopServlet() {
         super();
     }
 
@@ -28,17 +28,15 @@ public class ShowLoginServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setAttribute("_token", request.getSession().getId());
-
-//      セッションにフラッシュメッセージが登録されている場合はリクエストスコープに設定する
+//      セッションにフラッシュメッセージが設定されている場合はリクエストスコープに差し替え、セッションからは削除する
       String flush = (String)request.getSession().getAttribute("flush");
 
       if (flush != null) {
           request.setAttribute("flush", flush);
-          request.getSession().removeAttribute(flush);
+          request.getSession().removeAttribute("flush");
       }
 
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/showlogin.jsp");
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/indextop.jsp");
       rd.forward(request, response);
 
     }

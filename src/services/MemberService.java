@@ -2,6 +2,8 @@ package services;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import models.Member;
 import models.validators.MemberValidator;
 import utils.EncryptUtil;
@@ -54,5 +56,42 @@ public class MemberService extends ServiceBase {
        em.persist(m);
        em.getTransaction().commit();
 
+   }
+
+//   メールアドレスとパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
+
+   public Boolean validateLogin(String mail, String password, String pepper) {
+
+       boolean isValidMember = false;
+       if (mail != null && !mail.equals("") && password != null && !password.equals("")) {
+           Member m = findOne(mail, password, pepper);
+
+           if (m != null && m.getId() != null) {
+
+//               データが取得できた場合、認証成功
+               isValidMember = true;
+           }
+       }
+
+       return isValidMember;
+   }
+
+   public Member findOne(String mail, String password, String pepper) {
+
+       Member m = null;
+       try {
+//           パスワードのハッシュ化
+           String pass = EncryptUtil.getPasswordEncrypt(password, pepper);
+
+//           メールアドレスとハッシュ化済みパスワードを条件に会員を1件取得する
+           m = em.createNamedQuery("membergetByMailAndPass", Member.class)
+                   .setParameter("mail", mail)
+                   .setParameter("password", pass)
+                   .getSingleResult();
+       } catch (NoResultException ex) {
+
+       }
+
+       return m;
    }
 }

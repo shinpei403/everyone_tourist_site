@@ -17,7 +17,10 @@ import javax.persistence.Table;
 
     @NamedQuery(
         name = "memberCountRegisteredByMail",
-        query = "SELECT COUNT(m) FROM Member AS m WHERE m.mail = :mail"
+        query = "SELECT COUNT(m) FROM Member AS m WHERE m.mail = :mail"),
+    @NamedQuery(
+        name = "membergetByMailAndPass",
+        query = "SELECT m FROM Member AS m WHERE m.mail = :mail AND m.password = :password"
     )
 })
 @Table(name = "members")

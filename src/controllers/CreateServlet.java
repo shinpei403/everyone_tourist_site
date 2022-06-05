@@ -79,7 +79,7 @@ public class CreateServlet extends HttpServlet {
                 request.getSession().setAttribute("flush","会員登録が完了しました。");
 
 //                トップページにリダイレクト
-                response.sendRedirect("/everyone_tourist_site/index");
+                response.sendRedirect(request.getContextPath() + "/indextop");
             }
         }
     }
