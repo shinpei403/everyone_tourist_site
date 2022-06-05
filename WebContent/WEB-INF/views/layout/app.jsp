@@ -12,9 +12,17 @@
         <div id="wrapper">
             <div id="header">
                 <div id="header_menu">
-                    <h1>みんなの観光サイト</h1>
+                    <h1><a href="${pageContext.request.contextPath}/indextop">みんなの観光サイト</a></h1>
                 </div>
+                <c:if test="${sessionScope.login_member != null}">
+                    <div id="member_name">
+                    <c:out value="${sessionScope.login_member.name}" />
+                    &nbsp;さん&nbsp;&nbsp;&nbsp;
+                    <a>ログアウト</a>
+                    </div>
+                </c:if>
             </div>
+
             <div id="content">${param.content}</div>
             <div id="footer">by NANA SHIOMI.</div>
         </div>

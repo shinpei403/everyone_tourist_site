@@ -88,6 +88,7 @@ public class MemberService extends ServiceBase {
                    .setParameter("mail", mail)
                    .setParameter("password", pass)
                    .getSingleResult();
+
        } catch (NoResultException ex) {
 
        }

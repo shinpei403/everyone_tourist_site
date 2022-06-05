@@ -40,14 +40,14 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String pepper = (String)request.getServletContext().getAttribute("pepper");
 
-        Boolean isValidMember = service.validateLogin(mail, password, pepper);
+//      CSRF対策 tokenのチェック
+      String _token = request.getParameter("_token");
+      if(_token != null && _token.equals(request.getSession().getId())) {
 
+          Boolean isValidMember = service.validateLogin(mail, password, pepper);
+
+//        認証成功の場合
         if (isValidMember) {
-//            認証成功の場合
-
-//            CSRF対策 tokenのチェック
-            String _token = request.getParameter("_token");
-            if(_token != null && _token.equals(request.getSession().getId())) {
 
 //                ログインした会員のDBデータを取得
                 m = service.findOne(mail, password, pepper);
