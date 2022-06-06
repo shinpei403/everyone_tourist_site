@@ -18,7 +18,7 @@
                     <div id="member_name">
                     <c:out value="${sessionScope.login_member.name}" />
                     &nbsp;さん&nbsp;&nbsp;&nbsp;
-                    <a>ログアウト</a>
+                    <a href="${pageContext.request.contextPath}/logout">ログアウト</a>
                     </div>
                 </c:if>
             </div>
