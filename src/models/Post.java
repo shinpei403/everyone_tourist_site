@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,6 +34,7 @@ public class Post {
 
 //    内容
 
+    @Lob
     @Column(name = "content", nullable = false)
     private String content;
 
@@ -43,6 +45,15 @@ public class Post {
     private Member member;
 
 //    登録日時
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+//    更新日時
+
+    @Column(name = "update_at", nullable = false)
+    private LocalDateTime updatedAt;
+
 
     public Integer getId() {
         return id;
@@ -91,13 +102,4 @@ public class Post {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-//    更新日時
-
-    @Column(name = "update_at", nullable = false)
-    private LocalDateTime updatedAt;
-
 }
