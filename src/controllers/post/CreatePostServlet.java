@@ -1,15 +1,20 @@
 package controllers.post;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
 
 import models.Member;
 import models.Post;
@@ -19,6 +24,7 @@ import services.PostService;
  * Servlet implementation class CreatePostServlet
  */
 @WebServlet("/createpost")
+@MultipartConfig(maxFileSize=1048576)
 public class CreatePostServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -55,11 +61,29 @@ public class CreatePostServlet extends HttpServlet {
             p.setCreatedAt(now);
             p.setUpdatedAt(now);
 
+//            リクエストからアップロードしたファイルデータを取得
+            Part part = request.getPart("uploadFile");
+
+//          try-with-resources文を利用して、InputStreamの変数を宣言
+            try (
+//                    ファイルストリームを取得
+                    InputStream fileStream = part.getInputStream()
+                    ) {
+
+//                ファイルデータをByte[]に型変換し、設定
+                p.setData(IOUtils.toByteArray(fileStream));
+
+            } catch (IOException e) {
+                throw e;
+            }
+
 //　　　　　　投稿テーブル操作のインスタンスを作成
             PostService service = new PostService();
 
 //            投稿情報登録
             List<String> errors = service.create(p);
+
+            service.close();
 
             if(errors.size() > 0) {
 //                投稿中にエラーがあった場合

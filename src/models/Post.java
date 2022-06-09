@@ -54,6 +54,10 @@ public class Post {
     @Column(name = "update_at", nullable = false)
     private LocalDateTime updatedAt;
 
+//    写真
+    @Column(name = "data", nullable = false, columnDefinition="mediumblob")
+    private byte[] data;
+
 
     public Integer getId() {
         return id;
@@ -101,5 +105,13 @@ public class Post {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }

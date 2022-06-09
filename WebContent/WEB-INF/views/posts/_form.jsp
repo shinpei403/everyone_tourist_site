@@ -23,6 +23,9 @@
 <textarea name="content" rows="10" cols="50">${post.content}</textarea>
 <br /><br />
 
+<input name="uploadFile" type="file"/>
+<br /><br />
+
 <input type="hidden" name="id" value="${post.id}" />
 <input type="hidden" name="_token" value="${_token}" />
 <button type="submit">投稿</button>
