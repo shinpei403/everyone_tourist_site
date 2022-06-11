@@ -24,7 +24,7 @@ import services.PostService;
  * Servlet implementation class CreatePostServlet
  */
 @WebServlet("/createpost")
-@MultipartConfig(maxFileSize=1048576)
+@MultipartConfig(maxFileSize=104857600)
 public class CreatePostServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -67,7 +67,7 @@ public class CreatePostServlet extends HttpServlet {
 //          try-with-resources文を利用して、InputStreamの変数を宣言
             try (
 //                    ファイルストリームを取得
-                    InputStream fileStream = part.getInputStream()
+                    InputStream fileStream = part.getInputStream();
                     ) {
 
 //                ファイルデータをByte[]に型変換し、設定
