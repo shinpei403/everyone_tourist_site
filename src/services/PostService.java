@@ -25,5 +25,27 @@ public class PostService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+//    指定されたページ数の一覧画面に表示するデータを取得し、Postのリストで返却する
+    public List<Post> getPerPage(int page) {
+        List<Post> posts = em.createNamedQuery("postgetAll", Post.class)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
+
+        return posts;
+
+    }
+
+//    投稿テーブルのデータの件数を取得し、返却する
+    public long countAll() {
+        long posCount = (long) em.createNamedQuery("postcount", Long.class)
+                .getSingleResult();
+
+        return posCount;
+    }
+
+
+
+
 
 }

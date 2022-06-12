@@ -10,12 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 //投稿データのDTOモデル
 
 @Entity
 @Table(name = "posts")
+@NamedQueries({
+    @NamedQuery(
+            name = "postgetAll",
+            query = "SELECT p FROM Post AS p ORDER BY p.id DESC"),
+    @NamedQuery(
+            name = "postcount",
+            query = "SELECT COUNT(p) FROM Post AS p"
+            )
+})
 
 public class Post {
 
