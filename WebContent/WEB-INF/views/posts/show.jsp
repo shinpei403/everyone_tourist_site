@@ -35,7 +35,7 @@
 
         <c:if test="${sessionScope.login_member.id == post.member.id}">
             <p>
-                <a>この投稿を編集する</a>
+                <a href="${pageContext.request.contextPath}/editpost?id=${post.id}">この投稿を編集する</a>
             </p>
         </c:if>
 
