@@ -44,6 +44,20 @@ public class PostService extends ServiceBase {
         return posCount;
     }
 
+//    idを条件に取得したデータをPostのインスタンスで返却する
+    public Post findOne(int id) {
+        Post p = findOneInternal(id);
+
+        return p;
+    }
+
+//    idを条件にデータを1件取得し、Postのインスタンスで返却する
+    private Post findOneInternal(int id) {
+        Post p = em.find(Post.class, id);
+
+        return p;
+    }
+
 
 
 

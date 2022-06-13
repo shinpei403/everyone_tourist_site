@@ -25,7 +25,6 @@ public class IndexSearch extends HttpServlet {
      */
     public IndexSearch() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**

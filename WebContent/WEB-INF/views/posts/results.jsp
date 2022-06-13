@@ -21,7 +21,7 @@
                     <tr class="row${status.count % 2}">
                         <td class="post_name"><c:out value="${post.member.name}" /></td>
                         <td class="post_title">${post.title}</td>
-                        <td class="post_action"><a>詳細を見る</a></td>
+                        <td class="post_action"><a href="${pageContext.request.contextPath}/showpost?id=${post.id}">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
