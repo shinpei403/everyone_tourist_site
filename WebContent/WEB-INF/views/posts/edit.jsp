@@ -5,7 +5,7 @@
     <c:param name="content">
 
         <h2>投稿 編集</h2>
-        <form method="POST" action="${pageContext.request.contextPath}/updatepost" >
+        <form method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/updatepost" >
             <c:import url="_form.jsp" />
         </form>
 

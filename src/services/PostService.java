@@ -9,8 +9,10 @@ import models.validators.PostValidator;
 
 public class PostService extends ServiceBase {
 
+//    画面から入力された投稿の登録内容を元にデータを1件作成し、投稿テーブルに登録する
     public List<String> create(Post p) {
         List<String> errors = PostValidator.validate(p);
+
         if(errors.size() == 0) {
             createInternal(p);
         }
@@ -58,8 +60,24 @@ public class PostService extends ServiceBase {
         return p;
     }
 
+//    画面から入力された投稿の登録内容を元に投稿データを更新する
+    public List<String> update(Post p) {
 
+//        バリデーションを行う
+        List<String> errors = PostValidator.validate(p);
 
+        if (errors.size() == 0) {
+            updateInternal(p);
+        }
 
+//        バリデーションで発生したエラーを返却(エラーがなければ0件の空リスト)
+        return errors;
+
+    }
+
+    private void updateInternal(Post p) {
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+    }
 
 }
