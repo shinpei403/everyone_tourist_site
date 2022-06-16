@@ -80,4 +80,16 @@ public class PostService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+    public void destroy(Integer id) {
+
+//        idを条件に登録済みの投稿情報を取得する
+        Post savedPost = findOne(id);
+
+        em.getTransaction().begin();
+        em.remove(savedPost);
+        em.getTransaction().commit();
+        em.close();
+
+    }
+
 }

@@ -77,6 +77,8 @@ public class UpdatePostServlet extends HttpServlet {
 //            日報データを更新
             List<String> errors = service.update(p);
 
+            service.close();
+
             if (errors.size() > 0) {
 //                更新中にエラーが発生した場合
 
@@ -88,9 +90,9 @@ public class UpdatePostServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/edit.jsp");
                 rd.forward(request, response);
             } else {
-//                更新中にエラーが発生した場合
+//                更新中にエラーがなかった場合
 
-//                セッションにエラーが発生した場合
+//                セッションに更新完了のフラッシュメッセージを設定
                 request.getSession().setAttribute("flush", "更新が完了しました。");
 
 //              トップページにリダイレクト

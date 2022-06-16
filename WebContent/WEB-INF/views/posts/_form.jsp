@@ -23,7 +23,7 @@
 <textarea name="content" rows="10" cols="50">${post.content}</textarea>
 <br /><br />
 
-<input name="uploadFile" type="file"/>
+<input name="uploadFile" type="file" value="${post.data}"/>
 <br /><br />
 
 <input type="hidden" name="id" value="${post.id}" />
