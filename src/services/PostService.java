@@ -89,7 +89,31 @@ public class PostService extends ServiceBase {
         em.remove(savedPost);
         em.getTransaction().commit();
         em.close();
+    }
+
+//    指定した地元の投稿データを指定されたページ数の一覧画面に表示する分取得しPostのリストで返却する
+    public List<Post> getHometownPage(String hometown, int page) {
+
+        List<Post> post= em.createNamedQuery("postgethometown",Post.class)
+                .setParameter("hometown", hometown)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
+
+        return post;
 
     }
+
+//    指定した地元の投稿データの件数を取得し、返却する
+    public long countHometown(String homtown) {
+
+        long count = (long) em.createNamedQuery("postcounthometown", Long.class)
+                .setParameter("hometown", homtown)
+                .getSingleResult();
+
+        return count;
+    }
+
+
 
 }

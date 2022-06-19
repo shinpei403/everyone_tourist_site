@@ -24,7 +24,13 @@ import javax.persistence.Table;
             query = "SELECT p FROM Post AS p ORDER BY p.id DESC"),
     @NamedQuery(
             name = "postcount",
-            query = "SELECT COUNT(p) FROM Post AS p"
+            query = "SELECT COUNT(p) FROM Post AS p"),
+    @NamedQuery(
+            name = "postgethometown",
+            query = "SELECT p FROM Post As p WHERE p.member.hometown = :hometown ORDER BY p.id DESC"),
+    @NamedQuery(
+            name = "postcounthometown",
+            query = "SELECT COUNT(p) FROM Post As p WHERE p.member.hometown = :hometown"
             )
 })
 

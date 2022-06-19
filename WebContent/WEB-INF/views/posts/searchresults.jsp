@@ -3,13 +3,10 @@
 
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
-            <div id="flush_success">
-                <c:out value="${flush}"></c:out>
-            </div>
-        </c:if>
-        <h2>投稿検索画面</h2>
-        <h3>【投稿一覧】</h3>
+        <h2>検索結果</h2>
+
+        <h3>【${hometown}の投稿一覧】</h3>
+
         <table id="post_list">
             <tbody>
                 <tr>
@@ -35,7 +32,7 @@
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="${pageContext.request.contextPath}/indexsearch?page=${i}"><c:out value="${i}" /></a>&nbsp;
+                        <a href="${pageContext.request.contextPath}/searchresultspost?page=${i}"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
@@ -43,6 +40,6 @@
 
         <p><a href="${pageContext.request.contextPath}/newpost">新規投稿</a></p>
         <%--<p><a>投稿一覧に戻る</a></p>--%>
-
     </c:param>
 </c:import>
+
