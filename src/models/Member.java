@@ -14,7 +14,9 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "getAllMembers",
         query = "SELECT m FROM Member AS m ORDER BY m.id DESC"),
-
+    @NamedQuery(
+        name = "memberCount",
+        query = "SELECT COUNT(m) FROM Member AS m"),
     @NamedQuery(
         name = "memberCountRegisteredByMail",
         query = "SELECT COUNT(m) FROM Member AS m WHERE m.mail = :mail"),
@@ -46,6 +48,8 @@ public class Member {
     @Column(name = "adminFlag", nullable = false)
     private Boolean adminFlag;
 
+    @Column(name = "deleteFlag", nullable = false)
+    private Boolean deleteFlag;
 
     public Integer getId() {
         return id;
@@ -95,6 +99,14 @@ public class Member {
 
     public void setAdminFlag(Boolean adminFlag) {
         this.adminFlag = adminFlag;
+    }
+
+    public Boolean getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
 

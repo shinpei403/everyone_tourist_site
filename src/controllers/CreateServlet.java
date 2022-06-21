@@ -52,6 +52,8 @@ public class CreateServlet extends HttpServlet {
 
             m.setAdminFlag(false);
 
+            m.setDeleteFlag(false);
+
             MemberService service = new MemberService();
 
 //            アプリケーションスコープからpepper文字列を取得

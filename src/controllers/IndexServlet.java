@@ -33,20 +33,36 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         MemberService service = new MemberService();
+//
+//        List<Member> members = service.getList();
 
-        List<Member> members = service.getList();
+//        指定されたページ数の一覧画面に表示する会員データを取得
+        int page = 1;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch(NumberFormatException e) {}
+
+        List<Member> members = service.getPerPage(page);
+
+//        全ての会員データの件数を取得
+        long memberCount = service.countAll();
 
         service.close();
 
         request.setAttribute("members", members);
+        request.setAttribute("memberCount", memberCount);
+        request.setAttribute("page", page);
+        request.setAttribute("maxRow", 15);
 
-        String flush = (String)request.getSession().getAttribute("flush");
+////        セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+//        String flush = (String)request.getSession().getAttribute("flush");
+//
+//        if (flush != null) {
+//            request.setAttribute("flush", flush);
+//            request.getSession().removeAttribute("flush");
+//        }
 
-        if (flush != null) {
-            request.setAttribute("flush", flush);
-            request.getSession().removeAttribute("flush");
-        }
-
+//        会員一覧画面を表示
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/index.jsp");
         rd.forward(request, response);
 

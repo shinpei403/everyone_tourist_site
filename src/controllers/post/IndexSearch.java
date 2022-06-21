@@ -49,6 +49,8 @@ public class IndexSearch extends HttpServlet {
 //        全てに投稿データの件数を取得
         long postCount = service.countAll();
 
+        service.close();
+
         request.setAttribute("posts", posts);
         request.setAttribute("post_count", postCount);
         request.setAttribute("page", page);

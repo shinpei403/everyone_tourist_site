@@ -24,7 +24,7 @@
             <button type="submit">検索</button>
         </form>
 
-        <%--<p><a>投稿一覧に戻る</a></p>--%>
+        <p><a href="${pageContext.request.contextPath}/indexsearch">投稿一覧に戻る</a></p>
 
     </c:param>
 </c:import>

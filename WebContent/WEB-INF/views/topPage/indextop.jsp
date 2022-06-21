@@ -29,6 +29,7 @@
             </tbody>
         </table>
         <p><a href="${pageContext.request.contextPath}/newpost">新規投稿</a></p>
-        <p><a href="${pageContext.request.contextPath}/indexsearch">投稿検索</a></p>
+        <p><a href="${pageContext.request.contextPath}/indexsearch">投稿一覧</a></p>
+        <p><a href="${pageContext.request.contextPath}/searchpost">投稿検索</a></p>
     </c:param>
 </c:import>

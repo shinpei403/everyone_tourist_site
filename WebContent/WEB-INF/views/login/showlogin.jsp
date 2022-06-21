@@ -27,7 +27,7 @@
             <button type="submit">ログイン</button>
         </form>
 
-        <p><a href="${pageContext.request.contextPath}/new">会員登録</a></p>
+        <%-- <p><a href="${pageContext.request.contextPath}/new">会員登録</a></p> --%>
 
     </c:param>
 </c:import>

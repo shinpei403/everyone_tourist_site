@@ -40,7 +40,7 @@
         </c:if>
 
         <p>
-            <a href="${pageContext.request.contextPath}/indexsearch">投稿検索画面に戻る</a>
+            <a href="${pageContext.request.contextPath}/indexsearch">投稿一覧画面に戻る</a>
         </p>
 
     </c:param>

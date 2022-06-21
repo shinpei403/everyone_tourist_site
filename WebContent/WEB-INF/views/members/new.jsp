@@ -14,7 +14,7 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a href="${pageContext.request.contextPath}/showlogin">ログイン画面に戻る</a></p>
+        <%-- <p><a href="${pageContext.request.contextPath}/showlogin">ログイン画面に戻る</a></p>--%>
 
     </c:param>
 </c:import>

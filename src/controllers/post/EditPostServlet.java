@@ -38,6 +38,8 @@ public class EditPostServlet extends HttpServlet {
 //      idを条件に投稿データを取得する
       Post p = service.findOne(Integer.parseInt(request.getParameter("id")));
 
+      service.close();
+
 //    セッションからログイン中の会員情報を取得
       Member m = (Member) request.getSession().getAttribute("login_member");
 

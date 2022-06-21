@@ -36,6 +36,8 @@ public class DestroyPostServlet extends HttpServlet {
 
             service.destroy(Integer.parseInt(request.getParameter("id")));
 
+            service.close();
+
 //            セッションに削除完了のフラッシュメッセージを設定
             request.getSession().setAttribute("flush", "削除が完了しました。");
 

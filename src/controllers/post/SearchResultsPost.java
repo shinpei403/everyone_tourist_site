@@ -52,6 +52,8 @@ public class SearchResultsPost extends HttpServlet {
 //            指定した地元の投稿の件数を取得
             long postsCount = service.countHometown(hometown);
 
+            service.close();
+
             request.setAttribute("posts", posts);
             request.setAttribute("post_count", postsCount);
             request.setAttribute("page", page);

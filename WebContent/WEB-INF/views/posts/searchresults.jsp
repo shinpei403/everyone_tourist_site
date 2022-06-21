@@ -39,7 +39,7 @@
         </div>
 
         <p><a href="${pageContext.request.contextPath}/newpost">新規投稿</a></p>
-        <%--<p><a>投稿一覧に戻る</a></p>--%>
+        <p><a href="${pageContext.request.contextPath}/indexsearch">投稿一覧に戻る</a></p>
     </c:param>
 </c:import>
 

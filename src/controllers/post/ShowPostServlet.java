@@ -37,6 +37,8 @@ public class ShowPostServlet extends HttpServlet {
 //        idを条件に投稿データを取得する
         Post p = service.findOne(Integer.parseInt(request.getParameter("id")));
 
+        service.close();
+
         if(p != null) {
             request.setAttribute("post", p);
 

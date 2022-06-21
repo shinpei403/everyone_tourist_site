@@ -8,8 +8,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>投稿検索画面</h2>
-        <h3>【投稿一覧】</h3>
+        <h2>投稿一覧</h2>
         <table id="post_list">
             <tbody>
                 <tr>
@@ -42,7 +41,6 @@
         </div>
 
         <p><a href="${pageContext.request.contextPath}/newpost">新規投稿</a></p>
-        <%--<p><a>投稿一覧に戻る</a></p>--%>
-
+        <p><a href="${pageContext.request.contextPath}/searchpost">投稿検索</a></p>
     </c:param>
 </c:import>

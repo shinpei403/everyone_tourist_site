@@ -95,4 +95,50 @@ public class MemberService extends ServiceBase {
 
        return m;
    }
+
+//   指定されたページの一覧画面に表示する会員データを取得し、Memberのリストで返却する
+   public List<Member> getPerPage(int page) {
+       List<Member> members = em.createNamedQuery("getAllMembers", Member.class)
+               .setFirstResult(15 * (page - 1))
+               .setMaxResults(15)
+               .getResultList();
+
+       return members;
+
+   }
+
+//   会員テーブルのデータ件数を取得し、返却する
+   public long countAll() {
+       long memberCount = (long) em.createNamedQuery("memberCount", Long.class)
+               .getSingleResult();
+
+       return memberCount;
+   }
+
+   public Member findOne(int id) {
+       Member m = em.find(Member.class,id);
+
+       return m;
+   }
+
+//   idを条件に会員データを論理削除する
+   public void destroy(Integer id) {
+
+//       idを条件に登録済みの会員情報を取得する
+       Member savedMember = findOne(id);
+
+//       論理削除フラグをたてる
+       savedMember.setDeleteFlag(true);
+
+//       更新処理を行う
+       update(savedMember);
+
+   }
+
+//   会員データを更新する
+   private void update(Member m) {
+       em.getTransaction().begin();
+       em.getTransaction().commit();
+   }
+
 }
