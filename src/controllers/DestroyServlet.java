@@ -39,7 +39,8 @@ public class DestroyServlet extends HttpServlet {
 
             service.close();
 
-            request.setAttribute("flush","退会が完了しました。");
+//          セッションに登録完了のフラッシュメッセージを設定
+          request.getSession().setAttribute("flush","退会が完了しました。");
 
 //            トップページにリダイレクト
             response.sendRedirect(request.getContextPath() + "/indextop");
