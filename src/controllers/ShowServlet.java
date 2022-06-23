@@ -31,28 +31,39 @@ public class ShowServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        MemberService service = new MemberService();
+//      管理者チェック
+      Member mm = (Member) request.getSession().getAttribute("login_member");
 
-//        idを条件に会員データを取得する
-        Member m = service.findOne(Integer.parseInt(request.getParameter("id")));
+      if(mm.getAdminFlag() == true) {
 
-        service.close();
+          MemberService service = new MemberService();
 
-        if (m == null) {
+//          idを条件に会員データを取得する
+          Member m = service.findOne(Integer.parseInt(request.getParameter("id")));
 
-//      エラー画面を表示
+          service.close();
 
-            return;
-        }
+          if (m == null) {
 
-//      CSRF対策
-        request.setAttribute("_token", request.getSession().getId());
-        request.setAttribute("member", m);
+//          エラー画面を表示
 
-//      詳細画面を表示
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/show.jsp");
-        rd.forward(request, response);
+              return;
+          }
 
-    }
+//          CSRF対策
+            request.setAttribute("_token", request.getSession().getId());
+            request.setAttribute("member", m);
 
+    //      詳細画面を表示
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/show.jsp");
+            rd.forward(request, response);
+
+          } else {
+
+//            エラー画面を表示
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
+            rd.forward(request, response);
+
+          }
+      }
 }

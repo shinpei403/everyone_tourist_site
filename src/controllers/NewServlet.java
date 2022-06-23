@@ -30,14 +30,28 @@ public class NewServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        CSRF対策
-        request.setAttribute("_token", request.getSession().getId());
+//        管理者チェック
+        Member mm = (Member) request.getSession().getAttribute("login_member");
 
-//        インスタンスを生成
-        request.setAttribute("member", new Member());
+        if (mm.getAdminFlag() == true) {
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/new.jsp");
-        rd.forward(request, response);
+//          CSRF対策
+            request.setAttribute("_token", request.getSession().getId());
+
+//          インスタンスを生成
+            request.setAttribute("member", new Member());
+
+//            会員登録画面を表示
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/new.jsp");
+            rd.forward(request, response);
+        } else {
+
+//            エラー画面を表示
+
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
+            rd.forward(request, response);
+
+        }
     }
 
 }

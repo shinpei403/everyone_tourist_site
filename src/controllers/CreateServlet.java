@@ -32,58 +32,70 @@ public class CreateServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String _token = request.getParameter("_token");
-        if(_token != null && _token.equals(request.getSession().getId())) {
+//      管理者チェック
+      Member mm = (Member) request.getSession().getAttribute("login_member");
 
-//            インスタンスを生成
-            Member m = new Member();
+      if (mm.getAdminFlag() == true) {
 
-            String name = request.getParameter("name");
-            m.setName(name);
+            String _token = request.getParameter("_token");
+            if(_token != null && _token.equals(request.getSession().getId())) {
 
-            String hometown = request.getParameter("hometown");
-            m.setHometown(hometown);
+//              インスタンスを生成
+                Member m = new Member();
 
-            String mail = request.getParameter("mail");
-            m.setMail(mail);
+                String name = request.getParameter("name");
+                m.setName(name);
 
-            String password = request.getParameter("password");
-            m.setPassword(password);
+                String hometown = request.getParameter("hometown");
+                m.setHometown(hometown);
 
-            m.setAdminFlag(false);
+                String mail = request.getParameter("mail");
+                m.setMail(mail);
 
-            m.setDeleteFlag(false);
+                String password = request.getParameter("password");
+                m.setPassword(password);
 
-            MemberService service = new MemberService();
+                m.setAdminFlag(false);
 
-//            アプリケーションスコープからpepper文字列を取得
-            String pepper = (String)request.getServletContext().getAttribute("pepper");
+                m.setDeleteFlag(false);
 
-//            会員情報登録
-            List<String> errors = service.create(m,pepper);
+                MemberService service = new MemberService();
 
-            service.close();
+//               アプリケーションスコープからpepper文字列を取得
+                String pepper = (String)request.getServletContext().getAttribute("pepper");
 
-            if (errors.size() > 0) {
-//                更新中にエラーが発生した場合
+//              会員情報登録
+                List<String> errors = service.create(m,pepper);
 
-                request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("member", m);
-                request.setAttribute("errors", errors);
+                service.close();
 
-//                会員登録画面を表示
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/new.jsp");
-                rd.forward(request, response);
+                if (errors.size() > 0) {
+//                  更新中にエラーが発生した場合
+
+                    request.setAttribute("_token", request.getSession().getId());
+                    request.setAttribute("member", m);
+                    request.setAttribute("errors", errors);
+
+    //                会員登録画面を表示
+                    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/new.jsp");
+                    rd.forward(request, response);
+                } else {
+    //                登録中にエラーがなかった場合
+
+    //                セッションに登録完了のフラッシュメッセージを設定
+                    request.getSession().setAttribute("flush","会員登録が完了しました。");
+
+    //                トップページにリダイレクト
+                    response.sendRedirect(request.getContextPath() + "/indextop");
+                }
+
             } else {
-//                登録中にエラーがなかった場合
 
-//                セッションに登録完了のフラッシュメッセージを設定
-                request.getSession().setAttribute("flush","会員登録が完了しました。");
+//              エラー画面を表示
 
-//                トップページにリダイレクト
-                response.sendRedirect(request.getContextPath() + "/indextop");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
+                rd.forward(request, response);
             }
         }
     }
-
 }
