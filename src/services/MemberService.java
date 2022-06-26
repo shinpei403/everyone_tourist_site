@@ -141,4 +141,50 @@ public class MemberService extends ServiceBase {
        em.getTransaction().commit();
    }
 
+//   画面から入力された会員の更新内容を元にデータを1件作成し、会員テーブルを更新する
+   public List<String> update(Member m, String pepper) {
+
+//       idを条件に登録済みの会員を取得する
+       Member savedMember = findOne(m.getId());
+
+       boolean validateMail = false;
+       if (!savedMember.getMail().equals(m.getMail())) {
+//           メールアドレスを更新する場合
+
+//           メールアドレスについてのバリデーションを行う
+           validateMail = true;
+//           変更後のメールアドレスを設定する
+           savedMember.setMail(m.getMail());
+       }
+
+       boolean validatePass = false;
+       if (m.getPassword() != null && !m.getPassword().equals("")) {
+//           パスワードに入力がある場合
+
+//           パスワードについてのバリデーションを行う
+           validatePass = true;
+
+//           変更後のパスワードをハッシュ化し設定する
+           savedMember.setPassword(
+                   EncryptUtil.getPasswordEncrypt(m.getPassword(), pepper));
+       }
+
+//       変更後の氏名を設定する
+       savedMember.setName(m.getName());
+
+//       変更後の地元を設定する
+       savedMember.setHometown(m.getHometown());
+
+//       更新内容についてバリデーションを行う
+       List<String> errors = MemberValidator.validate(this, savedMember, validateMail, validatePass);
+
+//       バリデーションエラーがなければデータを更新する
+       if (errors.size() == 0) {
+           update(savedMember);
+       }
+
+//       エラーを返却（エラーがなければ0件の空リスト）
+       return errors;
+   }
+
 }

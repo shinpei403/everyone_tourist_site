@@ -32,6 +32,10 @@
         </table>
 
         <p>
+            <a href="${pageContext.request.contextPath}/edit?id=${member.id}">この会員情報を編集する</a>
+        </p>
+
+        <p>
             <a href="#" onclick="confirmDestroy();">この会員を退会させる</a>
         </p>
         <form method="POST"

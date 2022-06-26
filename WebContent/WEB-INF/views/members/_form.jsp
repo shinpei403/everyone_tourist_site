@@ -26,6 +26,7 @@
 <input type="password" name="password"  />
 <br /><br />
 
+<input type="hidden" name="id" value="${member.id}" />
 <input type="hidden" name="_token" value="${_token}" />
 <button type="submit">登録</button>
 
