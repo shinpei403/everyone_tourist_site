@@ -33,7 +33,7 @@
             </tbody>
         </table>
 
-        <c:if test="${sessionScope.login_member.id == post.member.id}">
+        <c:if test="${sessionScope.login_member.id == post.member.id || sessionScope.login_member.adminFlag == true}">
             <p>
                 <a href="${pageContext.request.contextPath}/editpost?id=${post.id}">この投稿を編集する</a>
             </p>

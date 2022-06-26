@@ -11,7 +11,10 @@
 </c:if>
 
 <label for="name">氏名</label><br />
-<c:out value="${sessionScope.login_member.name}" />
+<c:choose>
+    <c:when test="${post.member == null}"><c:out value="${sessionScope.login_member.name}" /></c:when>
+    <c:otherwise><c:out value="${post.member.name}" /></c:otherwise>
+</c:choose>
 <br /><br />
 
 <label for="title">タイトル</label><br />

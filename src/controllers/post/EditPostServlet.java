@@ -44,7 +44,7 @@ public class EditPostServlet extends HttpServlet {
       Member m = (Member) request.getSession().getAttribute("login_member");
 
 //      該当の投稿データが存在する、ログインしている会員が投稿の作成者
-      if (p != null && m.getId() == p.getMember().getId()) {
+      if (p != null && m.getId() == p.getMember().getId() || m.getAdminFlag() == true) {
 //        CSRF対策
         request.setAttribute("_token", request.getSession().getId());
 
@@ -54,7 +54,6 @@ public class EditPostServlet extends HttpServlet {
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/edit.jsp");
       rd.forward(request, response);
       }
-
 
     }
 
