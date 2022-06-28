@@ -42,10 +42,10 @@ public class CreatePostServlet extends HttpServlet {
         String _token = request.getParameter("_token");
         if(_token != null && _token.equals(request.getSession().getId())) {
 
-//            投稿インスタンスを作成
+            //            投稿インスタンスを作成
             Post p = new Post();
 
-//              セッションからログイン中の会員情報を取得
+            //              セッションからログイン中の会員情報を取得
             Member m = (Member) request.getSession().getAttribute("login_member");
 
             String title = request.getParameter("title");
@@ -56,52 +56,52 @@ public class CreatePostServlet extends HttpServlet {
 
             p.setMember(m);
 
-//            登録日時、更新日時は現在時刻を設定
+            //            登録日時、更新日時は現在時刻を設定
             LocalDateTime now = LocalDateTime.now();
             p.setCreatedAt(now);
             p.setUpdatedAt(now);
 
-//            リクエストからアップロードしたファイルデータを取得
+            //            リクエストからアップロードしたファイルデータを取得
             Part part = request.getPart("uploadFile");
 
-//          try-with-resources文を利用して、InputStreamの変数を宣言
+            //          try-with-resources文を利用して、InputStreamの変数を宣言
             try (
-//                    ファイルストリームを取得
+                    //                    ファイルストリームを取得
                     InputStream fileStream = part.getInputStream();
                     ) {
 
-//                ファイルデータをByte[]に型変換し、設定
+                //                ファイルデータをByte[]に型変換し、設定
                 p.setData(IOUtils.toByteArray(fileStream));
 
             } catch (IOException e) {
                 throw e;
             }
 
-//　　　　　　投稿テーブル操作のインスタンスを作成
+            //　　　　　　投稿テーブル操作のインスタンスを作成
             PostService service = new PostService();
 
-//            投稿情報登録
+            //            投稿情報登録
             List<String> errors = service.create(p);
 
             service.close();
 
             if(errors.size() > 0) {
-//                投稿中にエラーがあった場合
+                //                投稿中にエラーがあった場合
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("post", p);
                 request.setAttribute("errors", errors);
 
-//                新規投稿画面を再表示
+                //                新規投稿画面を再表示
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/new.jsp");
                 rd.forward(request, response);
             } else {
-//                投稿中にエラーがなかった場合
+                //                投稿中にエラーがなかった場合
 
-//                セッションに登録完了のフラッシュメッセージを設定
+                //                セッションに登録完了のフラッシュメッセージを設定
                 request.getSession().setAttribute("flush", "登録が完了しました。");
 
-//                トップページにリダイレクト
+                //                トップページにリダイレクト
                 response.sendRedirect(request.getContextPath() + "/indextop");
             }
         }

@@ -48,7 +48,8 @@ public class LoginFilter implements Filter {
             // セッションスコープに保存された会員（ログインユーザ）情報を取得
             Member m = (Member)session.getAttribute("login_member");
 
-            if(servlet_path.equals("/showlogin") || servlet_path.equals("/login") ) {        // ログイン画面について
+            if(servlet_path.equals("/showlogin") || servlet_path.equals("/login") ||
+                    servlet_path.equals("/new") || servlet_path.equals("/create")) {        // ログイン画面・会員登録画面について
                 // ログインしているのにログイン画面を表示させようとした場合は
                 // システムのトップページにリダイレクト
                 if(m != null) {

@@ -26,6 +26,15 @@
 <textarea name="content" rows="10" cols="50">${post.content}</textarea>
 <br /><br />
 
+<c:if test="${post.id != null}">
+    <p>【登録済みの画像】
+        <img src="${pageContext.request.contextPath}/show_image?id=${post.id}">
+    </p>
+    <label for="deleteFlag">画像を削除する</label>
+    <input type="checkbox" name="deleteFlag" />
+    <br /><br />
+</c:if>
+
 <input name="uploadFile" type="file" value="${post.data}"/>
 <br /><br />
 

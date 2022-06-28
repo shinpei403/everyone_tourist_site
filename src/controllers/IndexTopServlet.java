@@ -28,16 +28,16 @@ public class IndexTopServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//      セッションにフラッシュメッセージが設定されている場合はリクエストスコープに差し替え、セッションからは削除する
-      String flush = (String)request.getSession().getAttribute("flush");
+        //      セッションにフラッシュメッセージが設定されている場合はリクエストスコープに差し替え、セッションからは削除する
+        String flush = (String)request.getSession().getAttribute("flush");
 
-      if (flush != null) {
-          request.setAttribute("flush", flush);
-          request.getSession().removeAttribute("flush");
-      }
+        if (flush != null) {
+            request.setAttribute("flush", flush);
+            request.getSession().removeAttribute("flush");
+        }
 
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/indextop.jsp");
-      rd.forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/indextop.jsp");
+        rd.forward(request, response);
 
     }
 

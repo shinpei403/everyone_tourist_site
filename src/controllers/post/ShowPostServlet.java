@@ -31,10 +31,10 @@ public class ShowPostServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        投稿テーブル操作用のインスタンスを生成
+        //        投稿テーブル操作用のインスタンスを生成
         PostService service = new PostService();
 
-//        idを条件に投稿データを取得する
+        //        idを条件に投稿データを取得する
         Post p = service.findOne(Integer.parseInt(request.getParameter("id")));
 
         service.close();
@@ -42,7 +42,7 @@ public class ShowPostServlet extends HttpServlet {
         if(p != null) {
             request.setAttribute("post", p);
 
-//            詳細画面を表示
+            //            詳細画面を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/show.jsp");
             rd.forward(request, response);
         }

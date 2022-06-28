@@ -31,39 +31,39 @@ public class ShowServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//      管理者チェック
-      Member mm = (Member) request.getSession().getAttribute("login_member");
+        //      管理者チェック
+        Member mm = (Member) request.getSession().getAttribute("login_member");
 
-      if(mm.getAdminFlag() == true) {
+        if(mm.getAdminFlag() == true) {
 
-          MemberService service = new MemberService();
+            MemberService service = new MemberService();
 
-//          idを条件に会員データを取得する
-          Member m = service.findOne(Integer.parseInt(request.getParameter("id")));
+            //          idを条件に会員データを取得する
+            Member m = service.findOne(Integer.parseInt(request.getParameter("id")));
 
-          service.close();
+            service.close();
 
-          if (m == null) {
+            if (m == null) {
 
-//          エラー画面を表示
+                //          エラー画面を表示
 
-              return;
-          }
+                return;
+            }
 
-//          CSRF対策
+            //          CSRF対策
             request.setAttribute("_token", request.getSession().getId());
             request.setAttribute("member", m);
 
-    //      詳細画面を表示
+            //      詳細画面を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/show.jsp");
             rd.forward(request, response);
 
-          } else {
+        } else {
 
-//            エラー画面を表示
+            //            エラー画面を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
             rd.forward(request, response);
 
-          }
-      }
+        }
+    }
 }

@@ -12,18 +12,18 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(
-        name = "getAllMembers",
-        query = "SELECT m FROM Member AS m ORDER BY m.id DESC"),
+            name = "getAllMembers",
+            query = "SELECT m FROM Member AS m ORDER BY m.id DESC"),
     @NamedQuery(
-        name = "memberCount",
-        query = "SELECT COUNT(m) FROM Member AS m"),
+            name = "memberCount",
+            query = "SELECT COUNT(m) FROM Member AS m"),
     @NamedQuery(
-        name = "memberCountRegisteredByMail",
-        query = "SELECT COUNT(m) FROM Member AS m WHERE m.mail = :mail"),
+            name = "memberCountRegisteredByMail",
+            query = "SELECT COUNT(m) FROM Member AS m WHERE m.mail = :mail"),
     @NamedQuery(
-        name = "membergetByMailAndPass",
-        query = "SELECT m FROM Member AS m WHERE m.mail = :mail AND m.password = :password"
-    )
+            name = "membergetByMailAndPass",
+            query = "SELECT m FROM Member AS m WHERE m.mail = :mail AND m.password = :password"
+            )
 })
 @Table(name = "members")
 public class Member {

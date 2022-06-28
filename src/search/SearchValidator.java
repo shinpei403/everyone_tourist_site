@@ -9,7 +9,7 @@ public class SearchValidator {
 
         List<String> errors = new ArrayList<String>();
 
-//        地元のチェック
+        //        地元のチェック
         String hometownError = validateHometown(hometown);
         if (!hometownError.equals("")) {
             errors.add(hometownError);

@@ -30,13 +30,13 @@ public class NewPostServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        CSRF対策
+        //        CSRF対策
         request.setAttribute("_token", request.getSession().getId());
 
-//        インスタンスを生成
+        //        インスタンスを生成
         request.setAttribute("post", new Post());
 
-//        新規登録画面を表示
+        //        新規登録画面を表示
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/new.jsp");
         rd.forward(request, response);
 

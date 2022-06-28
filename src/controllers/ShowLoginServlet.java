@@ -30,16 +30,16 @@ public class ShowLoginServlet extends HttpServlet {
 
         request.setAttribute("_token", request.getSession().getId());
 
-//      セッションにフラッシュメッセージが登録されている場合はリクエストスコープに設定する
-      String flush = (String)request.getSession().getAttribute("flush");
+        //      セッションにフラッシュメッセージが登録されている場合はリクエストスコープに設定する
+        String flush = (String)request.getSession().getAttribute("flush");
 
-      if (flush != null) {
-          request.setAttribute("flush", flush);
-          request.getSession().removeAttribute(flush);
-      }
+        if (flush != null) {
+            request.setAttribute("flush", flush);
+            request.getSession().removeAttribute(flush);
+        }
 
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/showlogin.jsp");
-      rd.forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/showlogin.jsp");
+        rd.forward(request, response);
 
     }
 

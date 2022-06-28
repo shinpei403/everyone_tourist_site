@@ -46,10 +46,10 @@ public class SearchResultsPost extends HttpServlet {
 
         if (errors.size() == 0) {
 
-//          指定した地元の投稿を指定されたページ数の一覧画面に表示する分取得する
+            //          指定した地元の投稿を指定されたページ数の一覧画面に表示する分取得する
             List<Post> posts = service.getHometownPage(hometown, page);
 
-//            指定した地元の投稿の件数を取得
+            //            指定した地元の投稿の件数を取得
             long postsCount = service.countHometown(hometown);
 
             service.close();
@@ -60,14 +60,14 @@ public class SearchResultsPost extends HttpServlet {
             request.setAttribute("maxRow", 15);
             request.setAttribute("hometown", hometown);
 
-////          セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
-//          String flush = (String)request.getSession().getAttribute("flush");
-//          if (flush != null) {
-//              request.setAttribute("flush", flush);
-//              request.getSession().removeAttribute(flush);
-//          }
+            ////          セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+            //          String flush = (String)request.getSession().getAttribute("flush");
+            //          if (flush != null) {
+            //              request.setAttribute("flush", flush);
+            //              request.getSession().removeAttribute(flush);
+            //          }
 
-//          検索結果を表示
+            //          検索結果を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/searchresults.jsp");
             rd.forward(request, response);
 
@@ -75,7 +75,7 @@ public class SearchResultsPost extends HttpServlet {
 
             request.setAttribute("errors", errors);
 
-//          検索画面を再表示
+            //          検索画面を再表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/search.jsp");
             rd.forward(request, response);
         }

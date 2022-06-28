@@ -9,7 +9,7 @@ import models.validators.PostValidator;
 
 public class PostService extends ServiceBase {
 
-//    画面から入力された投稿の登録内容を元にデータを1件作成し、投稿テーブルに登録する
+    //    画面から入力された投稿の登録内容を元にデータを1件作成し、投稿テーブルに登録する
     public List<String> create(Post p) {
         List<String> errors = PostValidator.validate(p);
 
@@ -17,7 +17,7 @@ public class PostService extends ServiceBase {
             createInternal(p);
         }
 
-//        バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
+        //        バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
         return errors;
     }
 
@@ -27,7 +27,7 @@ public class PostService extends ServiceBase {
         em.getTransaction().commit();
     }
 
-//    指定されたページ数の一覧画面に表示するデータを取得し、Postのリストで返却する
+    //    指定されたページ数の一覧画面に表示するデータを取得し、Postのリストで返却する
     public List<Post> getPerPage(int page) {
         List<Post> posts = em.createNamedQuery("postgetAll", Post.class)
                 .setFirstResult(15 * (page - 1))
@@ -38,7 +38,7 @@ public class PostService extends ServiceBase {
 
     }
 
-//    投稿テーブルのデータの件数を取得し、返却する
+    //    投稿テーブルのデータの件数を取得し、返却する
     public long countAll() {
         long posCount = (long) em.createNamedQuery("postcount", Long.class)
                 .getSingleResult();
@@ -46,31 +46,37 @@ public class PostService extends ServiceBase {
         return posCount;
     }
 
-//    idを条件に取得したデータをPostのインスタンスで返却する
+    //    idを条件に取得したデータをPostのインスタンスで返却する
     public Post findOne(int id) {
         Post p = findOneInternal(id);
 
         return p;
     }
 
-//    idを条件にデータを1件取得し、Postのインスタンスで返却する
+    //    idを条件にデータを1件取得し、Postのインスタンスで返却する
     private Post findOneInternal(int id) {
         Post p = em.find(Post.class, id);
 
         return p;
     }
 
-//    画面から入力された投稿の登録内容を元に投稿データを更新する
-    public List<String> update(Post p) {
+    //    画面から入力された投稿の登録内容を元に投稿データを更新する
+    public List<String> update(Post p, Boolean fileDeleteFlag) {
 
-//        バリデーションを行う
+        //        画像の削除
+        if (fileDeleteFlag) {
+            //              ファイル削除フラグがtrueの場合、nullを設定
+            p.setData(null);
+        }
+
+        //        バリデーションを行う
         List<String> errors = PostValidator.validate(p);
 
         if (errors.size() == 0) {
             updateInternal(p);
         }
 
-//        バリデーションで発生したエラーを返却(エラーがなければ0件の空リスト)
+        //        バリデーションで発生したエラーを返却(エラーがなければ0件の空リスト)
         return errors;
 
     }
@@ -82,7 +88,7 @@ public class PostService extends ServiceBase {
 
     public void destroy(Integer id) {
 
-//        idを条件に登録済みの投稿情報を取得する
+        //        idを条件に登録済みの投稿情報を取得する
         Post savedPost = findOne(id);
 
         em.getTransaction().begin();
@@ -91,7 +97,7 @@ public class PostService extends ServiceBase {
         em.close();
     }
 
-//    指定した地元の投稿データを指定されたページ数の一覧画面に表示する分取得しPostのリストで返却する
+    //    指定した地元の投稿データを指定されたページ数の一覧画面に表示する分取得しPostのリストで返却する
     public List<Post> getHometownPage(String hometown, int page) {
 
         List<Post> post= em.createNamedQuery("postgethometown",Post.class)
@@ -104,7 +110,7 @@ public class PostService extends ServiceBase {
 
     }
 
-//    指定した地元の投稿データの件数を取得し、返却する
+    //    指定した地元の投稿データの件数を取得し、返却する
     public long countHometown(String homtown) {
 
         long count = (long) em.createNamedQuery("postcounthometown", Long.class)

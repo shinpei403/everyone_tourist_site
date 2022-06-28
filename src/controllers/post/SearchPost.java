@@ -28,12 +28,12 @@ public class SearchPost extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//      CSRF対策
-      request.setAttribute("_token", request.getSession().getId());
+        //      CSRF対策
+        request.setAttribute("_token", request.getSession().getId());
 
-//      投稿検索画面を表示
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/search.jsp");
-      rd.forward(request, response);
+        //      投稿検索画面を表示
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/search.jsp");
+        rd.forward(request, response);
 
     }
 

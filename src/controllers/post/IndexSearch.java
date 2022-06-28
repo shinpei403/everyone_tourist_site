@@ -32,13 +32,13 @@ public class IndexSearch extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-////        投稿インスタンスを生成
-//        Post p = new Post();
+        ////        投稿インスタンスを生成
+        //        Post p = new Post();
 
-//        投稿テーブル操作用のインスタンスを生成
+        //        投稿テーブル操作用のインスタンスを生成
         PostService service = new PostService();
 
-//	    指定されたページ数の一覧画面に表示するデータを取得
+        //	    指定されたページ数の一覧画面に表示するデータを取得
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -46,7 +46,7 @@ public class IndexSearch extends HttpServlet {
 
         List<Post> posts = service.getPerPage(page);
 
-//        全てに投稿データの件数を取得
+        //        全てに投稿データの件数を取得
         long postCount = service.countAll();
 
         service.close();
@@ -56,14 +56,14 @@ public class IndexSearch extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("maxRow", 15);
 
-//        セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        //        セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = (String)request.getSession().getAttribute("flush");
         if (flush != null) {
             request.setAttribute("flush", flush);
             request.getSession().removeAttribute(flush);
         }
 
-//        一覧画面を表示
+        //        一覧画面を表示
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/results.jsp");
         rd.forward(request, response);
     }

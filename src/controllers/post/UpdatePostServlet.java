@@ -41,62 +41,71 @@ public class UpdatePostServlet extends HttpServlet {
         String _token = request.getParameter("_token");
         if(_token != null && _token.equals(request.getSession().getId())) {
 
-//            投稿テーブル操作のインスタンスを作成
+            //            投稿テーブル操作のインスタンスを作成
             PostService service = new PostService();
 
-//            idを条件に投稿データを取得する
+            //            idを条件に投稿データを取得する
             Post p = service.findOne(Integer.parseInt(request.getParameter("id")));
 
-//            フォームの内容を各フィールドに上書き
+            //            フォームの内容を各フィールドに上書き
             String title = request.getParameter("title");
             p.setTitle(title);
 
             String content = request.getParameter("content");
             p.setContent(content);
 
-//            更新日時のみ上書き
+            //            更新日時のみ上書き
             LocalDateTime now = LocalDateTime.now();
             p.setUpdatedAt(now);
 
-//            ファイルデータを更新
+            //            ファイルデータを更新
             Part part = request.getPart("uploadFile");
 
-//          try-with-resources文を利用して、InputStreamの変数を宣言
+            //          try-with-resources文を利用して、InputStreamの変数を宣言
             try (
-//                  ファイルストリームを取得
-                  InputStream fileStream = part.getInputStream();
-                  ) {
+                    //                  ファイルストリームを取得
+                    InputStream fileStream = part.getInputStream();
+                    ) {
 
-//              ファイルデータをByte[]に型変換し、設定
-              p.setData(IOUtils.toByteArray(fileStream));
+                //              ファイルデータをByte[]に型変換し、設定
+                p.setData(IOUtils.toByteArray(fileStream));
 
-          } catch (IOException e) {
-              throw e;
-          }
+            } catch (IOException e) {
+                throw e;
+            }
 
-//            日報データを更新
-            List<String> errors = service.update(p);
+            //            チェックボックスの情報を取得
+
+            boolean deleteFlag = false;
+
+            if (request.getParameter("deleteFlag") != null && "on".equals(request.getParameter("deleteFlag"))) {
+                //                deleteFlagのcheckboxがチェックされている場合
+                deleteFlag = true;
+            }
+
+            //            日報データを更新
+            List<String> errors = service.update(p, deleteFlag);
 
             service.close();
 
             if (errors.size() > 0) {
-//                更新中にエラーが発生した場合
+                //                更新中にエラーが発生した場合
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("post", p);
                 request.setAttribute("errors", errors);
 
-//                編集画面を再表示
+                //                編集画面を再表示
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/edit.jsp");
                 rd.forward(request, response);
             } else {
-//                更新中にエラーがなかった場合
+                //                更新中にエラーがなかった場合
 
-//                セッションに更新完了のフラッシュメッセージを設定
+                //                セッションに更新完了のフラッシュメッセージを設定
                 request.getSession().setAttribute("flush", "更新が完了しました。");
 
-//              トップページにリダイレクト
-              response.sendRedirect(request.getContextPath() + "/indextop");
+                //              トップページにリダイレクト
+                response.sendRedirect(request.getContextPath() + "/indextop");
             }
 
         }

@@ -33,7 +33,7 @@ public class ShowImageServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        リクエストパラメータからファイルIDを取得
+        //        リクエストパラメータからファイルIDを取得
         String id = request.getParameter("id");
 
         // EntityManagerのインスタンスを生成
@@ -42,21 +42,21 @@ public class ShowImageServlet extends HttpServlet {
         // ファイルIDをキーにファイル情報を取得
         Post file = em.find(Post.class, Integer.parseInt(id));
 
-     // ファイルデータを取得
+        // ファイルデータを取得
         byte[] fileData = file.getData();
 
-     // try-with-resources文を利用して、OutputStreamの変数を宣言
+        // try-with-resources文を利用して、OutputStreamの変数を宣言
         try (
-//                ResponseのOutputStreamを代入
+                //                ResponseのOutputStreamを代入
                 OutputStream os = response.getOutputStream();
                 ) {
-//            OutputStreamをファイルデータに書き込む
+            //            OutputStreamをファイルデータに書き込む
             os.write(fileData);
 
-//            OutputStreamを強制的に書き込み
+            //            OutputStreamを強制的に書き込み
             os.flush();
 
-//            EntityManagerのインスタンスを閉じる
+            //            EntityManagerのインスタンスを閉じる
             em.close();
 
         } catch (IOException e) {

@@ -37,41 +37,41 @@ import javax.persistence.Table;
 public class Post {
 
 
-//    id
+    //    id
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    タイトル
+    //    タイトル
 
     @Column(name = "title", length = 255, nullable = false)
     private String title;
 
-//    内容
+    //    内容
 
     @Lob
     @Column(name = "content", nullable = false)
     private String content;
 
-//    投稿をした会員
+    //    投稿をした会員
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-//    登録日時
+    //    登録日時
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-//    更新日時
+    //    更新日時
 
     @Column(name = "update_at", nullable = false)
     private LocalDateTime updatedAt;
 
-//    写真
+    //    写真
     @Column(name = "data", nullable = false, columnDefinition="mediumblob")
     private byte[] data;
 

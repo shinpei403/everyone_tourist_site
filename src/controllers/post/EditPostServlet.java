@@ -32,28 +32,28 @@ public class EditPostServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//      投稿テーブル操作用のインスタンスを生成
-      PostService service = new PostService();
+        //      投稿テーブル操作用のインスタンスを生成
+        PostService service = new PostService();
 
-//      idを条件に投稿データを取得する
-      Post p = service.findOne(Integer.parseInt(request.getParameter("id")));
+        //      idを条件に投稿データを取得する
+        Post p = service.findOne(Integer.parseInt(request.getParameter("id")));
 
-      service.close();
+        service.close();
 
-//    セッションからログイン中の会員情報を取得
-      Member m = (Member) request.getSession().getAttribute("login_member");
+        //    セッションからログイン中の会員情報を取得
+        Member m = (Member) request.getSession().getAttribute("login_member");
 
-//      該当の投稿データが存在する、ログインしている会員が投稿の作成者
-      if (p != null && m.getId() == p.getMember().getId() || m.getAdminFlag() == true) {
-//        CSRF対策
-        request.setAttribute("_token", request.getSession().getId());
+        //      該当の投稿データが存在する、ログインしている会員が投稿の作成者
+        if (p != null && m.getId() == p.getMember().getId() || m.getAdminFlag() == true) {
+            //        CSRF対策
+            request.setAttribute("_token", request.getSession().getId());
 
-        request.setAttribute("post", p);
+            request.setAttribute("post", p);
 
-//      編集画面を表示
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/edit.jsp");
-      rd.forward(request, response);
-      }
+            //      編集画面を表示
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/edit.jsp");
+            rd.forward(request, response);
+        }
 
     }
 

@@ -30,6 +30,7 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().removeAttribute("login_member");
 
         request.getSession().setAttribute("flush", "ログアウトしました。");
+
         response.sendRedirect(request.getContextPath() + "/showlogin");
     }
 

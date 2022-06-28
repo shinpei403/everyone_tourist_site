@@ -31,17 +31,17 @@ public class DestroyPostServlet extends HttpServlet {
         String _token = request.getParameter("_token");
         if(_token != null && _token.equals(request.getSession().getId())) {
 
-//            テーブル操作用のインスタンスを生成
+            //            テーブル操作用のインスタンスを生成
             PostService service = new PostService();
 
             service.destroy(Integer.parseInt(request.getParameter("id")));
 
             service.close();
 
-//            セッションに削除完了のフラッシュメッセージを設定
+            //            セッションに削除完了のフラッシュメッセージを設定
             request.getSession().setAttribute("flush", "削除が完了しました。");
 
-//            トップページにリダイレクト
+            //            トップページにリダイレクト
             response.sendRedirect(request.getContextPath() + "/indextop");
 
         }

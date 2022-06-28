@@ -32,14 +32,14 @@ public class UpdateServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        管理者チェック
+        //        管理者チェック
         Member mm = (Member) request.getSession().getAttribute("login_member");
         if (mm.getAdminFlag() == true) {
 
             String _token = request.getParameter("_token");
             if(_token != null && _token.equals(request.getSession().getId())) {
 
-//                会員情報のインスタンスを生成
+                //                会員情報のインスタンスを生成
                 Member m = new Member();
 
                 String id = request.getParameter("id");
@@ -57,35 +57,35 @@ public class UpdateServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 m.setPassword(password);
 
-//              　アプリケーションスコープからpepper文字列を取得
-               String pepper = (String)request.getServletContext().getAttribute("pepper");
+                //              　アプリケーションスコープからpepper文字列を取得
+                String pepper = (String)request.getServletContext().getAttribute("pepper");
 
-//              　テーブル操作用のインスタンスを生成
+                //              　テーブル操作用のインスタンスを生成
                 MemberService service = new MemberService();
 
-//                会員情報を更新
+                //                会員情報を更新
                 List<String> errors = service.update(m, pepper);
 
                 service.close();
 
                 if (errors.size() > 0) {
-//                    更新中にエラーが発生した場合
+                    //                    更新中にエラーが発生した場合
 
                     request.setAttribute("_token", request.getSession().getId());
                     request.setAttribute("member", m);
                     request.setAttribute("errors", errors);
 
-//                  編集画面を表示
+                    //                  編集画面を表示
                     RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/edit.jsp");
                     rd.forward(request, response);
                 } else {
 
-//                    更新中にエラーがなかった場合
+                    //                    更新中にエラーがなかった場合
 
-//                  セッションに登録完了のフラッシュメッセージを設定
+                    //                  セッションに登録完了のフラッシュメッセージを設定
                     request.getSession().setAttribute("flush","更新が完了しました。");
 
-//                  トップページにリダイレクト
+                    //                  トップページにリダイレクト
                     response.sendRedirect(request.getContextPath() + "/indextop");
 
                 }
@@ -94,7 +94,7 @@ public class UpdateServlet extends HttpServlet {
 
         } else {
 
-//            エラー画面を表示
+            //            エラー画面を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
             rd.forward(request, response);
 

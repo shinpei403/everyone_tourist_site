@@ -31,30 +31,30 @@ public class DestroyServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//      管理者チェック
-      Member mm = (Member) request.getSession().getAttribute("login_member");
+        //      管理者チェック
+        Member mm = (Member) request.getSession().getAttribute("login_member");
 
-      if(mm.getAdminFlag() == true) {
+        if(mm.getAdminFlag() == true) {
 
             String _token = request.getParameter("_token");
             if(_token != null && _token.equals(request.getSession().getId())) {
 
                 MemberService service = new MemberService();
 
-//                idを条件に会員データを論理削除する
+                //                idを条件に会員データを論理削除する
                 service.destroy(Integer.parseInt(request.getParameter("id")));
 
                 service.close();
 
-//              セッションに登録完了のフラッシュメッセージを設定
+                //              セッションに登録完了のフラッシュメッセージを設定
                 request.getSession().setAttribute("flush","退会が完了しました。");
 
-//              トップページにリダイレクト
+                //              トップページにリダイレクト
                 response.sendRedirect(request.getContextPath() + "/indextop");
 
             } else {
 
-//              エラー画面を表示
+                //              エラー画面を表示
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
                 rd.forward(request, response);
 
