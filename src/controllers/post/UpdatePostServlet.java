@@ -58,7 +58,7 @@ public class UpdatePostServlet extends HttpServlet {
             LocalDateTime now = LocalDateTime.now();
             p.setUpdatedAt(now);
 
-            //            ファイルデータを更新
+            //ファイルデータを更新
             Part part = request.getPart("uploadFile");
 
             //          try-with-resources文を利用して、InputStreamの変数を宣言

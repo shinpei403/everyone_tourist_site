@@ -30,7 +30,13 @@ import javax.persistence.Table;
             query = "SELECT p FROM Post As p WHERE p.member.hometown = :hometown ORDER BY p.id DESC"),
     @NamedQuery(
             name = "postcounthometown",
-            query = "SELECT COUNT(p) FROM Post As p WHERE p.member.hometown = :hometown"
+            query = "SELECT COUNT(p) FROM Post As p WHERE p.member.hometown = :hometown"),
+    @NamedQuery(
+            name = "postgetAllMine",
+            query = "SELECT p FROM Post As p WHERE p.member = :member ORDER BY p.id DESC"),
+    @NamedQuery(
+            name = "postcountAllMine",
+            query = "SELECT COUNT(p) FROM Post As p WHERE p.member = :member"
             )
 })
 
@@ -72,7 +78,7 @@ public class Post {
     private LocalDateTime updatedAt;
 
     //    写真
-    @Column(name = "data", nullable = false, columnDefinition="mediumblob")
+    @Column(name = "data", nullable = true, columnDefinition="mediumblob")
     private byte[] data;
 
 

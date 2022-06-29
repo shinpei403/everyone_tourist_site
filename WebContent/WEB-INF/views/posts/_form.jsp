@@ -26,7 +26,7 @@
 <textarea name="content" rows="10" cols="50">${post.content}</textarea>
 <br /><br />
 
-<c:if test="${post.id != null}">
+<c:if test="${post.data != null}">
     <p>【登録済みの画像】
         <img src="${pageContext.request.contextPath}/show_image?id=${post.id}">
     </p>
@@ -35,7 +35,7 @@
     <br /><br />
 </c:if>
 
-<input name="uploadFile" type="file" value="${post.data}"/>
+<input name="uploadFile" type="file" />
 <br /><br />
 
 <input type="hidden" name="id" value="${post.id}" />

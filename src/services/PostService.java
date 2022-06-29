@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 
+import models.Member;
 import models.Post;
 import models.validators.PostValidator;
 
@@ -120,6 +121,26 @@ public class PostService extends ServiceBase {
         return count;
     }
 
+    //    指定した会員が作成した投稿データを、指定されたページ数の一覧画面に表示する分取得しPostのリストで返却する
+    public List<Post> getMinePerPage(Member m, int page) {
 
+        List<Post> posts = em.createNamedQuery("postgetAllMine", Post.class)
+                .setParameter("member", m)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
+
+        return posts;
+    }
+
+    //    指定した会員が作成した投稿データの件数を取得し、返却する
+    public long countAllMine(Member m) {
+
+        long count = (long) em.createNamedQuery("postcountAllMine", Long.class)
+                .setParameter("member", m)
+                .getSingleResult();
+
+        return count;
+    }
 
 }

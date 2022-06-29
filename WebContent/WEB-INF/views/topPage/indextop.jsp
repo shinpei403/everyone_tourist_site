@@ -17,17 +17,30 @@
                     <th class="post_title">タイトル</th>
                     <th class="post_action">操作</th>
                 </tr>
-                <%-- <c:forEach var="report" items="${reports}" varStatus="status">
-                    <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
+                <c:forEach var="post" items="${posts}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}" /></td>
-                        <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
+                        <td class="post_name"><c:out value="${post.member.name}" /></td>
+                        <td class="post_title">${post.title}</td>
+                        <td class="post_action"><a href="${pageContext.request.contextPath}/showpost?id=${post.id}">詳細を見る</a></td>
                     </tr>
-                </c:forEach>--%>
+                </c:forEach>
             </tbody>
         </table>
+
+        <div id="pagination">
+            （全 ${posts_count} 件）<br />
+            <c:forEach var="i" begin="1" end="${((post_count - 1) / 15) + 1}" step="1">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <c:out value="${i}" />&nbsp;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/indexsearch?page=${i}"><c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+
         <p><a href="${pageContext.request.contextPath}/newpost">新規投稿</a></p>
         <p><a href="${pageContext.request.contextPath}/indexsearch">投稿一覧</a></p>
         <p><a href="${pageContext.request.contextPath}/searchpost">投稿検索</a></p>
