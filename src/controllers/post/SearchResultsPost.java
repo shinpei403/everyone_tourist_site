@@ -60,13 +60,6 @@ public class SearchResultsPost extends HttpServlet {
             request.setAttribute("maxRow", 15);
             request.setAttribute("hometown", hometown);
 
-            ////          セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
-            //          String flush = (String)request.getSession().getAttribute("flush");
-            //          if (flush != null) {
-            //              request.setAttribute("flush", flush);
-            //              request.getSession().removeAttribute(flush);
-            //          }
-
             //          検索結果を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/searchresults.jsp");
             rd.forward(request, response);

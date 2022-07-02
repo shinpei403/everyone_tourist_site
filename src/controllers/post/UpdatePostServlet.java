@@ -58,7 +58,8 @@ public class UpdatePostServlet extends HttpServlet {
             LocalDateTime now = LocalDateTime.now();
             p.setUpdatedAt(now);
 
-            //ファイルデータを更新
+
+            //フォームからファイルデータを取得
             Part part = request.getPart("uploadFile");
 
             //          try-with-resources文を利用して、InputStreamの変数を宣言
@@ -74,8 +75,8 @@ public class UpdatePostServlet extends HttpServlet {
                 throw e;
             }
 
-            //            チェックボックスの情報を取得
 
+            //            チェックボックスの情報を取得
             boolean deleteFlag = false;
 
             if (request.getParameter("deleteFlag") != null && "on".equals(request.getParameter("deleteFlag"))) {

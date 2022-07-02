@@ -46,6 +46,8 @@ public class EditServlet extends HttpServlet {
             if (m == null) {
 
                 //                エラー画面を表示
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
+                rd.forward(request, response);
 
                 return;
 

@@ -10,13 +10,6 @@ import utils.EncryptUtil;
 
 public class MemberService extends ServiceBase {
 
-    public List<Member> getList() {
-
-        List<Member> members = em.createNamedQuery("getAllMembers", Member.class).getResultList();
-
-        return members;
-    }
-
     //   画面から入力された会員情報を元にデータを1件作成し、会員テーブルに登録
 
     public List<String> create(Member m, String pepper) {

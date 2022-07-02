@@ -32,9 +32,6 @@ public class IndexSearch extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ////        投稿インスタンスを生成
-        //        Post p = new Post();
-
         //        投稿テーブル操作用のインスタンスを生成
         PostService service = new PostService();
 
