@@ -53,6 +53,10 @@ public class EditPostServlet extends HttpServlet {
             //      編集画面を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/edit.jsp");
             rd.forward(request, response);
+        } else {
+//          エラー画面を表示
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
+            rd.forward(request, response);
         }
 
     }

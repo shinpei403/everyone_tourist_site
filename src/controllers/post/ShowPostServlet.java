@@ -45,6 +45,11 @@ public class ShowPostServlet extends HttpServlet {
             //            詳細画面を表示
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/posts/show.jsp");
             rd.forward(request, response);
+        } else {
+//          エラー画面を表示
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/unknown.jsp");
+            rd.forward(request, response);
+
         }
     }
 
