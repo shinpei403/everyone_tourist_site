@@ -24,22 +24,20 @@ Eclipseで作ったWebアプリケーションです。
 ## Setup
 
 
-  1.repositoryをcloneします。
-  2.プロジェクトをクリーンします。
-  3.Eclipseの右下のビルド表示が消えたら、プロジェクトが実行できるか確認します。
+  1.repositoryをcloneします。<br>
+  2.プロジェクトをクリーンします。<br>
+  3.Eclipseの右下のビルド表示が消えたら、プロジェクトが実行できるか確認します。<br>
   4.ブラウザから以下のURLにアクセスします。<br>
      `http://localhost:8080/everyone_tourist_site/new `
   
   5.フォームに内容を入力し、「会員登録」ボタンをクリックします。
  
 ## Usage
+   1.以下のURLにアクセスし、ログイン画面が表示されます。<br>
+    `http://localhost:8080/everyone_tourist_site/showlogin`
+    
+   2.メールアドレスとパスワードを入力し、ログインします。
 
-<ol>
-  <li>以下のURLにアクセスし、ログイン画面が表示されます。<br>
-    http://localhost:8080/everyone_tourist_site/showlogin
-  </li>
-  <li>メールアドレスとパスワードを入力し、ログインします。</li>
-</ol>
 
 ## Licence
 
