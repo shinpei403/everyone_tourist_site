@@ -28,7 +28,7 @@ Eclipseで作ったWebアプリケーションです。
   <li>プロジェクトをクリーンします。</li>
   <li>Eclipseの右下のビルド表示が消えたら、プロジェクトが実行できるか確認します。</li>
   <li>ブラウザから以下のURLにアクセスします。<br>
-    http://localhost:8080/everyone_tourist_site/new</li>
+    `http://localhost:8080/everyone_tourist_site/new</li>`
   <li>フォームに内容を入力し、「会員登録」ボタンをクリックします。</li>
 </ol>  
 
@@ -36,7 +36,7 @@ Eclipseで作ったWebアプリケーションです。
 
 <ol>
   <li>以下のURLにアクセスし、ログイン画面が表示されます。<br>
-      http://localhost:8080/everyone_tourist_site/showlogin</li>
+      `http://localhost:8080/everyone_tourist_site/showlogin</li>`
   <li>メールアドレスとパスワードを入力し、ログインします。</li>
 </ol>
 
